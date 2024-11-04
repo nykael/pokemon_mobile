@@ -1,30 +1,32 @@
 import styled from "styled-components/native";
 import Constants from 'expo-constants';
-import { Feather } from "@expo/vector-icons";
 
 type ImageProps = {
     selected: boolean;
 }
 
-export const Container = styled.View`
+export const Container = styled.ScrollView.attrs({
+    showsVerticalScrollIndicator: false,
+})`
     flex: 1;
-    margin: ${Constants.statusBarHeight}px 20px 20px ;
-    
-`
-export const Header = styled.View``
+    background-color: ${({theme}) => theme.colors.backgorund};
+    padding: ${Constants.statusBarHeight}px 20px 20px;
+`;
+
+export const Header = styled.View``;
 
 export const Title = styled.Text`
     text-align: center; 
     font-size: 18px;
     font-weight: bold;
-`
+`;
 
 export const ImgContainer = styled.View`
     border-radius: 18px;
-    border: 1px solid rebeccapurple;
+    border: 1px solid ${({theme}) => theme.colors.main};
     width: 100%;
     height: 400px;
-    background-color: rebeccapurple;
+    background-color: ${({theme}) => theme.colors.main};
     margin: 20px 0;
 `;
 
@@ -39,14 +41,10 @@ export const ControllerImagePrev = styled.View<ImageProps>`
     border-radius: 8px;
     width: 80px;
     height: 80px;
-    background-color: rebeccapurple;
-    margin: 20px 0;
+    background-color: ${({theme}) => theme.colors.main};
     margin: 0 10px 0 0;
-    opacity: ${({selected}) => selected ? '1': '0.7'};
-    
+    opacity: ${({ selected }) => (selected ? '1' : '0.4')};
 `;
-
-
 
 export const ImagePokemon = styled.Image`
     flex: 1;
@@ -62,9 +60,12 @@ export const TextList = styled.Text`
    font-weight: bold;
 `;
 
-export const Description = styled.View`
-    flex: 1;
+export const TextDescription = styled.Text`
+   font-size: 18px;
+   margin-bottom: 10px;
 `;
 
-
+export const Description = styled.View`
+   height: 100%;
+`;
 

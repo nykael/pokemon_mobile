@@ -2,6 +2,8 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "typeRoots": ["node_modules/@types", "./styles"],
+    "types": ["@types/styled-components-react-native"],
     "paths": {
       "@/*": [
         "./*"

@@ -12,6 +12,7 @@ import {
   ControllerImage,
   ControllerImagePrev,
   Header,
+  TextDescription
 } from '@/styles/home';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import theme from '@/styles/theme';
@@ -60,7 +61,7 @@ export default function Details() {
           data.sprites.front_shiny,
           data.sprites.back_shiny,
         ],
-        types: data.types.map(typeInfo => typeInfo.type.name),
+        types: data.types.map((typeInfo) => typeInfo.type.name),
         stats: data.stats.map(stat => ({
           name: stat.stat.name,
           base_stat: stat.base_stat,
@@ -138,16 +139,16 @@ export default function Details() {
 
       <Description>
         <TextList>Tipo</TextList>
-        <Text>
+        <TextDescription>
           Este Pokémon é do tipo: {pokemon.types.join(" e ")}. {`\n`}
-        </Text>
+        </TextDescription>
 
         <TextList>Status</TextList>
-        {pokemon.stats.map((stat, index) => (
-          <View key={index} style={{ marginBottom: 5 }}>
-            <Text>{stat.name.toUpperCase()}: {stat.base_stat}.</Text>
+          <View  style={{ marginBottom: 20 }}>
+            {pokemon.stats.map((stat, index) => (
+              <TextDescription key={index}> {stat.name.toUpperCase()}: {stat.base_stat}.</TextDescription>
+            ))}
           </View>
-        ))}
       </Description>
     </Container>
   );
