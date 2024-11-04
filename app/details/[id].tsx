@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { FlatList, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View, ActivityIndicator, StatusBar } from 'react-native';
 import axios from 'axios';
 import { Feather } from '@expo/vector-icons';
 import {
@@ -13,17 +13,17 @@ import {
   ControllerImagePrev,
   Header,
   TextDescription
-} from '@/styles/home';
+} from '@/styles/details';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import theme from '@/styles/theme';
 
 // Definindo tipos para o Pokémon
-interface Stat {
+type Stat = {
   name: string;
   base_stat: number;
 }
 
-interface Pokemon {
+type Pokemon = {
   name: string;
   photo: string[];
   types: string[];
@@ -46,7 +46,7 @@ export default function Details() {
     navigate.back()
   }
 
-  const getPokemon = async () => {
+  const fetchPokemonDetails = async () => {
     setLoad(true);
     setError(null);
     try {
@@ -61,11 +61,10 @@ export default function Details() {
           data.sprites.front_shiny,
           data.sprites.back_shiny,
         ],
-        types: data.types.map((typeInfo) => typeInfo.type.name),
-        stats: data.stats.map(stat => ({
+        types: data.types.map((typeInfo: { type: { name: string } }) => typeInfo.type.name),
+        stats: data.stats.map((stat: { stat: { name: string }; base_stat: number }) => ({
           name: stat.stat.name,
           base_stat: stat.base_stat,
-          effort: stat.effort,
         })),
       };
 
@@ -79,7 +78,7 @@ export default function Details() {
   };
 
   useEffect(() => {
-    getPokemon();
+    fetchPokemonDetails();
   }, []);
 
   if (load) {
@@ -93,6 +92,11 @@ export default function Details() {
   if (error) {
     return (
       <Container>
+          <StatusBar 
+            barStyle="dark-content"
+            backgroundColor="transparent"
+            translucent
+          />
         <Text>{error}</Text>
       </Container>
     );
@@ -104,6 +108,11 @@ export default function Details() {
 
   return (
     <Container>
+         <StatusBar 
+            barStyle="dark-content"
+            backgroundColor="transparent"
+            translucent
+          />
       <Header>
         <TouchableOpacity onPress={goToBack} accessibilityLabel="Voltar">
           <Feather name='arrow-left' size={28} color={theme.colors.text} />
