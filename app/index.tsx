@@ -16,7 +16,7 @@ export default function HomeScreen() {
         onMessage={handleMessage}
         style={styles.titleContainer}
         startInLoadingState={true}
-        source={{uri: 'http://192.168.5.106:3000/'}}
+        source={{uri: 'https://pokemon-web-gsnj.vercel.app/'}}
       />
   );
 }
