@@ -19,6 +19,7 @@ export const Title = styled.Text`
     text-align: center; 
     font-size: 18px;
     font-weight: bold;
+    text-transform: capitalize;
 `;
 
 export const ImgContainer = styled.View`
@@ -67,5 +68,6 @@ export const TextDescription = styled.Text`
 
 export const Description = styled.View`
    height: 100%;
+   margin-bottom: 60px;
 `;
 
